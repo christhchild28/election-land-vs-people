@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Land vs People</title>
+<meta name="description" content="Election cartograms that morph from real land area to share of voters, one country at a time.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>
+:root{--bg:#f6f4ef;--ink:#14243b;--mute:#5d6b7a;--card:#fff;--line:#d9d6cc;--soft:#efece4;
+--display:'Fraunces',Georgia,serif;--body:'Instrument Sans',system-ui,-apple-system,sans-serif;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1824;--ink:#eef1f4;--mute:#97a4b3;--card:#17232f;--line:#2a3846;--soft:#1d2b39;color-scheme:dark}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 var(--body);padding-block:32px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1040px;margin:auto;display:grid;gap:28px}
+h1{font:600 clamp(32px,8vw,56px)/1.02 var(--display);letter-spacing:-.025em;margin:0;text-wrap:balance}
+.lede{color:var(--mute);max-width:58ch;margin:12px 0 0;font-size:17px}
+.eyebrow{font:600 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin:0 0 10px}
+.grid{display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
+@media(min-width:760px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.card{display:grid;align-content:start;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 12px 16px;text-decoration:none;color:inherit;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(20,36,59,.14)}
+.card:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pair figure{margin:0;background:var(--soft);border-radius:10px;overflow:hidden;position:relative}
+.pair img{display:block;width:100%;height:auto;}
+.pair figcaption{padding:2px 8px 7px;font:600 9.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.meta{padding:0 6px;display:grid;gap:4px}
+.meta h2{font:600 24px/1.1 var(--display);margin:0}
+.meta p{margin:0;color:var(--mute);font-size:14.5px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.tags span{font:600 10.5px var(--mono);letter-spacing:.05em;text-transform:uppercase;border:1px solid var(--line);border-radius:99px;padding:3px 9px;color:var(--mute)}
+.how{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 18px 20px;display:grid;gap:8px}
+.how h2{font:600 20px var(--display);margin:0}
+.how p{margin:0;color:var(--mute);max-width:70ch}
+footer{color:var(--mute);font-size:13px}
+footer a{color:inherit}
+</style></head><body>
+<div class="wrap">
+<header><p class="eyebrow">Election cartograms</p><h1>Land vs people</h1>
+<p class="lede">Maps that start as a country’s real shape and morph, state by state, into hexagons sized by voters. Tap a region to resize it and see who really carried the land and who carried the people.</p></header>
+<main class="grid">
+<a class="card" href="usa/"><div class="pair"><figure><picture><source srcset="assets/thumbs/usa-land-dark.webp" media="(prefers-color-scheme:dark)"><img src="assets/thumbs/usa-land-light.webp" alt="US states drawn by land area" width="499" height="350" loading="lazy"></picture><figcaption>Land</figcaption></figure><figure><picture><source srcset="assets/thumbs/usa-people-dark.webp" media="(prefers-color-scheme:dark)"><img src="assets/thumbs/usa-people-light.webp" alt="US states drawn as electoral-vote hexagons" width="499" height="350" loading="lazy"></picture><figcaption>People</figcaption></figure></div>
+<div class="meta"><h2>United States</h2><p>2024 presidential election. Hexagons are electoral votes.</p><div class="tags"><span>50 states + DC</span><span>Swing vs 2020</span><span>Turnout</span></div></div></a>
+<a class="card" href="brazil/"><div class="pair"><figure><picture><source srcset="assets/thumbs/brazil-land-dark.webp" media="(prefers-color-scheme:dark)"><img src="assets/thumbs/brazil-land-light.webp" alt="Brazilian states drawn by land area" width="499" height="477" loading="lazy"></picture><figcaption>Land</figcaption></figure><figure><picture><source srcset="assets/thumbs/brazil-people-dark.webp" media="(prefers-color-scheme:dark)"><img src="assets/thumbs/brazil-people-light.webp" alt="Brazilian states drawn as voter hexagons" width="499" height="477" loading="lazy"></picture><figcaption>People</figcaption></figure></div>
+<div class="meta"><h2>Brazil</h2><p>2026 presidential runoff. One hexagon is about 250,000 registered voters.</p><div class="tags"><span>27 states</span><span>Swing vs 2022</span><span>Turnout</span></div></div></a>
+<a class="card" href="bulgaria/"><div class="pair"><figure><picture><source srcset="assets/thumbs/bulgaria-land-dark.webp" media="(prefers-color-scheme:dark)"><img src="assets/thumbs/bulgaria-land-light.webp" alt="Bulgarian provinces drawn by land area" width="499" height="298" loading="lazy"></picture><figcaption>Land</figcaption></figure><figure><picture><source srcset="assets/thumbs/bulgaria-people-dark.webp" media="(prefers-color-scheme:dark)"><img src="assets/thumbs/bulgaria-people-light.webp" alt="Bulgarian provinces drawn as voter hexagons" width="499" height="298" loading="lazy"></picture><figcaption>People</figcaption></figure></div>
+<div class="meta"><h2>Bulgaria</h2><p>April 2026 parliamentary election. One hexagon is about 100,000 registered voters.</p><div class="tags"><span>28 provinces + abroad</span><span>Party shares</span><span>Turnout</span></div></div></a>
+<a class="card" href="trinidad-tobago/"><div class="pair"><figure><picture><source srcset="assets/thumbs/trinidad-tobago-land-dark.webp" media="(prefers-color-scheme:dark)"><img src="assets/thumbs/trinidad-tobago-land-light.webp" alt="Trinidad and Tobago constituencies drawn by land area" width="499" height="420" loading="lazy"></picture><figcaption>Land</figcaption></figure><figure><picture><source srcset="assets/thumbs/trinidad-tobago-people-dark.webp" media="(prefers-color-scheme:dark)"><img src="assets/thumbs/trinidad-tobago-people-light.webp" alt="Trinidad and Tobago constituencies drawn as population hexagons" width="499" height="420" loading="lazy"></picture><figcaption>People</figcaption></figure></div>
+<div class="meta"><h2>Trinidad &amp; Tobago</h2><p>2025 general election, seat by seat. Hexagons are population.</p><div class="tags"><span>41 seats</span><span>Swing vs 2020</span><span>Candidates</span></div></div></a>
+</main>
+<section class="how"><h2>How to read them</h2><p>Each page opens on the real map. Tap a region and it grows or shrinks in place to its share of voters while a dashed line keeps its true outline. Tap several to compare, drag a box to select many, or flip the whole map. A colour menu switches between winner and swing.</p></section>
+<footer>Built with D3. Data sources and caveats for each page are in the <a href="https://github.com/christhchild28/election-land-vs-people#readme">README</a>.</footer>
+</div></body></html>
