@@ -1,11 +1,12 @@
 """Insert social-preview (Open Graph / Twitter) tags after the <title>. Idempotent.
-usage: python3 og_inject.py <html file> <key>   (key: landing|usa|brazil|bulgaria|trinidad-tobago)"""
+usage: python3 og_inject.py <html file> <key>   (key: landing|usa|brazil|bulgaria|new-zealand|trinidad-tobago)"""
 import re,sys
 BASE='https://christhchild28.github.io/election-land-vs-people/'
-M={'landing':('Land vs people','Election cartograms that morph from real land area to share of voters: US, Brazil, Bulgaria, Trinidad and Tobago.',''),
+M={'landing':('Land vs people','Election cartograms that morph from real land area to share of voters: US, Brazil, Bulgaria, New Zealand, Trinidad and Tobago.',''),
  'usa':('United States: land vs people','2024 presidential election. Tap a state to resize it from land area to electoral votes.','usa/'),
  'brazil':('Brazil: land vs people','2026 presidential runoff. Tap a state to resize it from land area to registered voters.','brazil/'),
  'bulgaria':('Bulgaria: land vs people','April 2026 parliamentary election. Tap a province to resize it from land area to registered voters.','bulgaria/'),
+ 'new-zealand':('New Zealand: land vs people','2026 general election (preliminary). Tap an electorate to resize it from land area to population.','new-zealand/'),
  'trinidad-tobago':('Trinidad and Tobago: land vs people','2025 general election. Tap a seat to resize it from land area to population.','trinidad-tobago/')}
 f,k=sys.argv[1],sys.argv[2];t,d,p=M[k]
 h=open(f,encoding='utf-8').read()

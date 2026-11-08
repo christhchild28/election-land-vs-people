@@ -9,6 +9,7 @@ Interactive election cartograms. Each page opens on a country's real map; tap a 
 | [`usa/`](usa/) | 2024 presidential | electoral votes | 50 states + DC |
 | [`brazil/`](brazil/) | 2026 presidential runoff | ~250,000 registered voters | 27 states |
 | [`bulgaria/`](bulgaria/) | April 2026 parliamentary | ~100,000 registered voters | 28 provinces + abroad |
+| [`new-zealand/`](new-zealand/) | 2026 general (preliminary, official 27 Nov) | population | 64 general + 7 Māori electorates ([`maori/`](new-zealand/maori/)) |
 | [`trinidad-tobago/`](trinidad-tobago/) | 2025 general | population | 41 constituencies |
 
 Each page is a single standalone HTML file (D3 7.9.0 from cdnjs, Google Fonts). No build step is needed to host them.
@@ -42,7 +43,7 @@ Full source notes are in each page's footnote. Summary:
 
 ```
 index.html            landing page
-usa/ brazil/ bulgaria/ trinidad-tobago/   the pages (index.html each)
+usa/ brazil/ bulgaria/ new-zealand/ trinidad-tobago/   the pages (index.html each)
 assets/thumbs/        landing-page thumbnails
 scripts/              reference build pipelines and data
 ```
