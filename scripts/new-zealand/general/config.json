@@ -94,5 +94,8 @@
   },
   "template": "nz.template.html",
   "kind_label": "General electorate",
-  "units_label": "general electorates"
+  "units_label": "general electorates",
+  "charts": {
+    "votes": "../data/electorate-votes.csv"
+  }
 }

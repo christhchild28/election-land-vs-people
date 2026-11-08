@@ -94,5 +94,8 @@
   },
   "template": "nz.template.html",
   "kind_label": "Māori electorate",
-  "units_label": "Māori electorates"
+  "units_label": "Māori electorates",
+  "charts": {
+    "votes": "../data/electorate-votes.csv"
+  }
 }

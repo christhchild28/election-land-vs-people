@@ -92,5 +92,18 @@ sub("[c.name, fmt(c.pop), fmt(c.d), fmt(c.r), (c.dem ? META.a + ' +' : META.b + 
 sub('<p class="dek" id="dek"></p>', '<p class="dek" id="dek"></p>\n    <div class="layernav" id="layernav" role="group" aria-label="Electorate layer"></div>')
 sub('/*PARTYCSS*/', '/*PARTYCSS*/\n.layernav { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 14px; }\n.layernav a { font: 500 14px/1 var(--f-body); min-height: 44px; display: inline-flex; align-items: center; padding: 0 16px; border: 1px solid var(--hair); border-radius: 999px; color: var(--ink-2); text-decoration: none; }\n.layernav a[aria-current="page"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }')
 sub("showCard(null);\n  recolor();", "(function () { var g = META.layer === 'general'; document.getElementById('layernav').innerHTML = '<a href=\"' + (g ? './' : '../') + '\"' + (g ? ' aria-current=\"page\"' : '') + '>General (64)</a><a href=\"' + (g ? 'maori/' : './') + '\"' + (g ? '' : ' aria-current=\"page\"') + '>M\u0101ori (7)</a>'; })();\n  showCard(null);\n  recolor();")
+
+# --- charts dropdown above the electorate table ---
+sub('  <details>\n    <summary>All {{NCOUNTIES}}', """  <details id="chartsd" class="chartsd">
+    <summary>Charts: density vs the vote, and who grows or shrinks</summary>
+    <div class="chartbody"><section class="chart" id="cSc" aria-live="polite"></section><section class="chart" id="cRk"></section></div>
+  </details>
+
+  <details>
+    <summary>All {{NCOUNTIES}}""")
+sub('/*PARTYCSS*/\n.layernav', '/*PARTYCSS*/\n/*CHARTCSS*/\n.layernav')
+sub("    hlI = i; syncHL();", "    hlI = i; syncHL(); if (window.__chartSel) window.__chartSel(i);")
+sub("  showCard(null);\n  recolor();", "/*CHARTJS*/\n  showCard(null);\n  recolor();")
+t = t.replace('/*CHARTCSS*/', open(os.path.join(H, 'nz_charts.css'), encoding='utf-8').read()).replace('/*CHARTJS*/', open(os.path.join(H, 'nz_charts.js'), encoding='utf-8').read())
 open(os.path.join(H, 'nz.template.html'), 'w', encoding='utf-8').write(t)
 print('wrote nz.template.html', len(t))

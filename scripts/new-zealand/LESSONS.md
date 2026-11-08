@@ -54,3 +54,10 @@ Written during the build (Nov 2026) so the next non-US / island-nation case star
 - A text-patch for the template swallowed a closing `uiMode(); }`, giving a JS syntax error that only showed in a browser. **Check:** always load the built page headless and fail on console errors, as part of the build.
 - Wording that assumed one story (Labour "packed into cities") was wrong for the Māori layer, where the runner-up holds large rural seats. **Check:** make generated copy conditional on the data, and read the dek of every layer.
 - Multi-layer elections (general plus Māori) need a layer switch and per-layer back links; decide this before the first build.
+
+## 9. Adding the density-vs-vote and grow/shrink charts
+- **Data:** the Electoral Commission preliminary site (electionresults.govt.nz/ge2026) has one page per electorate with candidate and party counts. It was reachable through the user's Chrome when the sandbox shell was blocked. All 71 margins matched our RNZ transcription exactly, which is a good cross-check. Saved as `data/electorate-votes.csv`.
+- **Design decision:** the candidate table does not say which party each candidate belongs to (only the top two show up in the status table), so a per-party candidate share is not available. We used **party-vote share** for the vertical axis: it is complete for every party, it is what decides seats under MMP, and the dot colour still shows who won the electorate.
+- **Small-n rule:** with 7 seats (Māori page) no fit line or r is drawn, and label placement tries eight positions.
+- **Areas:** true km² come from an equal-area (sinusoidal) projection of the land-clipped geometry, not from the engine's projected degrees.
+- **Next time:** ask early which vote measure a two-candidate chart should use, since MMP and preferential systems have no single "share of the vote".

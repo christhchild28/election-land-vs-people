@@ -43,6 +43,22 @@ if _parties:
     meta['parties'] = [dict(name=q['name']) for q in _parties]
     meta['layer'] = cfg.c['layer']; meta['unitsLabel'] = cfg.c.get('units_label', 'electorates'); meta['kindLabel'] = cfg.c.get('kind_label', 'Electorate'); meta['dekNote'] = cfg.c.get('text', {}).get('dek_note', '')
     _rf = cfg.c['results']['file']; meta['cand'] = {r['electorate']: r['candidate'] for r in _csv.DictReader(open(cfg.inp(_rf), encoding='utf-8')) if r['kind'] == cfg.c['layer']}
+_ch = cfg.c.get('charts')
+if _parties and _ch:
+    # votes + true land areas (km2, equal-area sinusoidal on the clipped geometry) for the density-vs-vote and grow/shrink charts
+    import math
+    from shapely.geometry import shape
+    from shapely.ops import transform
+    _vr = {r['electorate']: r for r in _csv.DictReader(open(cfg.inp(_ch['votes']), encoding='utf-8'))}
+    _PK = [('National', 'National', 'National'), ('Labour', 'Labour', 'Labour'), ('Greens', 'Greens', 'Greens'), ('ACT', 'ACT', 'ACT'), ('NZ First', 'NZ First', 'NZ First'), ('Te P\u0101ti M\u0101ori', 'Te P\u0101ti M\u0101ori', 'TPM')]
+    _pn = [q['name'] for q in _parties]
+    meta['pickers'] = [dict(k=k, s=sh, pi=(_pn.index(nm) if nm in _pn else None)) for k, nm, sh in _PK]
+    meta['votes'] = {n: dict(tv=int(_vr[n]['party_votes']), p={k: int(_vr[n][k]) for k, _, _ in _PK}) for n in names}
+    _R = 6371.0088
+    def _sin(x, y): return (math.radians(x) * math.cos(math.radians(y)) * _R, math.radians(y) * _R)
+    _gj = json.load(open(cfg.inp(cfg.c['geometry']['file']), encoding='utf-8'))
+    meta['km2'] = {f['properties']['name']: round(transform(_sin, shape(f['geometry'])).area, 1) for f in _gj['features']}
+    meta['unitsLabel'] = cfg.c.get('units_label', 'electorates')
 race = cfg.c['race']; year = (re.findall(r'\d{4}', race.get('date', '')) or [''])[-1]
 _same = [n for n in (cfg.c['candidates']['a']['name'], cfg.c['candidates']['b']['name']) if _prior and n in (_prior['a'], _prior['b'])]
 if _prior: meta['prior'] = dict(label=_prior['label'], short=_prior['short'], a=_prior['a'], b=_prior['b'], now=year or 'Now', same=_same)
