@@ -97,5 +97,8 @@
   "units_label": "Māori electorates",
   "charts": {
     "votes": "../data/electorate-votes.csv"
+  },
+  "analytics": {
+    "goatcounter": "nz-election2026"
   }
 }
