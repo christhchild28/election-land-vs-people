@@ -15,12 +15,13 @@
 var rail=R.getElementById('rail'),cards=[].slice.call(rail.children),dots=R.getElementById('dots'),pv=R.getElementById('pv'),nx=R.getElementById('nx'),cur=0;
 cards.forEach(function(c,i){var b=document.createElement('button');b.className='dot';b.setAttribute('aria-label','Card '+(i+1));b.onclick=function(){go(i)};dots.appendChild(b)});
 function go(i){i=Math.max(0,Math.min(cards.length-1,i));var c=cards[i];rail.scrollTo({left:c.offsetLeft-(rail.clientWidth-c.offsetWidth)/2,behavior:'smooth'})}
-function upd(){var m=rail.scrollLeft+rail.clientWidth/2,b=0,d=1e9;cards.forEach(function(c,i){var x=Math.abs(c.offsetLeft+c.offsetWidth/2-m);if(x<d){d=x;b=i}});if(rail.scrollLeft<4)b=0;else if(rail.scrollLeft+rail.clientWidth>=rail.scrollWidth-4)b=cards.length-1;cur=b;cards.forEach(function(c,i){c.classList.toggle('on',i===b)});[].forEach.call(dots.children,function(e,i){e.setAttribute('aria-current',i===b)});pv.disabled=b===0;nx.disabled=b===cards.length-1}
-rail.addEventListener('scroll',function(){clearTimeout(rail._t);rail._t=setTimeout(upd,40)},{passive:true});
+function upd(){var m=rail.scrollLeft+rail.clientWidth/2,b=0,d=1e9;cards.forEach(function(c,i){var x=Math.abs(c.offsetLeft+c.offsetWidth/2-m);if(x<d){d=x;b=i}});if(rail.scrollLeft<4)b=0;else if(rail.scrollLeft+rail.clientWidth>=rail.scrollWidth-4)b=cards.length-1;cur=b;[].forEach.call(dots.children,function(e,i){e.setAttribute('aria-current',i===b)});pv.disabled=b===0;nx.disabled=b===cards.length-1}
+var ticking=false;rail.addEventListener('scroll',function(){if(ticking)return;ticking=true;requestAnimationFrame(function(){ticking=false;upd()})},{passive:true});
 pv.onclick=function(){go(cur-1)};nx.onclick=function(){go(cur+1)};
 rail.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){e.preventDefault();go(cur+1)}if(e.key==='ArrowLeft'){e.preventDefault();go(cur-1)}});
 upd();
 cards.forEach(function(c,i){c.style.setProperty('--i',i)});
+if('IntersectionObserver' in window){var cio=new IntersectionObserver(function(es){es.forEach(function(e){e.target.classList.toggle('on',e.intersectionRatio>=.55)})},{root:rail,threshold:[0,.25,.55,.75,1]});cards.forEach(function(c){cio.observe(c)})}else cards[0].classList.add('on');
 if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){rail.classList.add('in');io.disconnect()}})},{threshold:.3});io.observe(rail)}else rail.classList.add('in');
 var hw=R.getElementById('hw'),seats=[].slice.call(hw.querySelectorAll('.s')),cn=R.getElementById('cn'),cl=R.getElementById('cl'),lgs=[].slice.call(R.querySelectorAll('.lg')),sel=-1;
 lgs.forEach(function(b,i){b.setAttribute('aria-pressed','false');b.onclick=function(){sel=sel===i?-1:i;lgs.forEach(function(x,j){x.setAttribute('aria-pressed',j===sel)});hw.classList.toggle('f',sel>-1);var n=0;seats.forEach(function(s){var on=+s.dataset.p===sel;s.classList.toggle('on',on);if(on)n++});if(sel>-1){cn.textContent=n;cl.textContent=b.textContent.replace(/\s*\d+$/,'')+' seats'}else{cn.textContent=131;cl.textContent='seats'}}});
