@@ -1036,9 +1036,18 @@ dl{margin:0}dt{font:500 11px var(--f-mono);letter-spacing:.06em;text-transform:u
 (function () {
   /* Switching layers must not carry the old scroll position over (Safari kept the General page's offset and opened the Māori page at its foot). */
   try { history.scrollRestoration = 'manual'; } catch (e) {}
-  var toMap = /[?&]map\b/.test(location.search);   /* ?map comes from the Māori page's General tab: land on the map, not the briefing */
-  if (toMap && META.layer === 'general') { var goMap = function () { var m = document.getElementById('mapstart'); if (m) m.scrollIntoView(); }; setTimeout(goMap, 0); window.addEventListener('load', goMap); }
-  else { var top0 = function () { window.scrollTo(0, 0); }; top0(); setTimeout(top0, 0); window.addEventListener('pageshow', function (e) { if (e.persisted) top0(); }); }
+  var toMap = /[?&]map\b/.test(location.search) && META.layer === 'general';   /* ?map comes from the Māori page's General tab: land on the map, not the briefing */
+  /* Safari can restore the previous page's scroll offset late, after load. Until the reader touches the page (or 2.5 s pass), keep putting the page where this arrival belongs: the top, or the map. */
+  var touched = false, until = Date.now() + 2500;
+  ['touchstart', 'pointerdown', 'mousedown', 'wheel', 'keydown'].forEach(function (ev) { window.addEventListener(ev, function () { touched = true; }, { passive: true, once: true }); });
+  var place = function () {
+    if (touched || Date.now() > until) return;
+    if (toMap) { var m = document.getElementById('mapstart'); if (m && Math.abs(m.getBoundingClientRect().top - 16) > 2) m.scrollIntoView(); }
+    else if (window.scrollY > 0) window.scrollTo(0, 0);
+  };
+  place(); setTimeout(place, 0); setTimeout(place, 150); setTimeout(place, 500);
+  window.addEventListener('load', place); window.addEventListener('scroll', place, { passive: true });
+  window.addEventListener('pageshow', function (e) { if (e.persisted) { touched = false; until = Date.now() + 2500; place(); } });
   var host = document.getElementById('intro-host'), tpl = document.getElementById('intro-tpl');
   if (host) { var ln = document.getElementById('layernav'); if (ln) { var gen = META.layer === 'general', bp = document.createElement('p'); bp.style.cssText = 'margin:-4px 0 14px;font:500 14px var(--f-body)'; bp.innerHTML = '<a href="' + (gen ? '#intro-host' : '../#intro-host') + '" style="color:var(--ink);text-underline-offset:3px;display:inline-block;padding:10px 0">' + 'Read the briefing' + ' \u2191</a>'; if (gen) bp.firstChild.addEventListener('click', function (e) { e.preventDefault(); host.scrollIntoView({ behavior: 'smooth' }); }); ln.insertAdjacentElement('afterend', bp); } }
   if (!host || !tpl || META.layer !== 'general') { if (host) host.remove(); return; }
