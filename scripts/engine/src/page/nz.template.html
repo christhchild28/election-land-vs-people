@@ -948,7 +948,7 @@ dl{margin:0}dt{font:500 11px var(--f-mono);letter-spacing:.06em;text-transform:u
     recolor();
   }
   if (PR) { document.getElementById('mWin').addEventListener('click', function () { track('color', 'winner'); setMode(0); }); document.getElementById('mSw').addEventListener('click', function () { track('color', 'swing'); setMode(1); }); document.getElementById('swcap').textContent = SWCAP; }
-  (function () { var g = META.layer === 'general'; document.getElementById('layernav').innerHTML = '<a href="' + (g ? './' : '../?map') + '"' + (g ? ' aria-current="page"' : '') + '>General (64)</a><a href="' + (g ? 'maori/' : './') + '"' + (g ? '' : ' aria-current="page"') + '>Māori (7)</a>'; })();
+  (function () { var g = META.layer === 'general'; document.getElementById('layernav').innerHTML = '<a href="' + (g ? './' : '../?map') + '"' + (g ? ' aria-current="page"' : '') + '>General (64)</a><a href="' + (g ? 'maori/?map' : './') + '"' + (g ? '' : ' aria-current="page"') + '>Māori (7)</a>'; })();
   /* ---------- charts: density vs the vote, and who grows or shrinks ---------- */
   (function () {
     var V = META.votes, KM = META.km2, PK = META.pickers || [];
@@ -1034,11 +1034,11 @@ dl{margin:0}dt{font:500 11px var(--f-mono);letter-spacing:.06em;text-transform:u
     drawSc(); drawRk(); chartSel(null); window.__chartSel = chartSel;
   })();
 
-/* Briefing: lives in a shadow root so its styles cannot touch the map page. General layer only; the Māori layer gets a link to it. */
+/* Briefing: lives in a shadow root so its styles cannot touch the map page. Shown above the map on both layers (General and Māori), so the two read as one group. */
 (function () {
   /* Switching layers must not carry the old scroll position over (Safari kept the General page's offset and opened the Māori page at its foot). */
   try { history.scrollRestoration = 'manual'; } catch (e) {}
-  var toMap = /[?&]map\b/.test(location.search) && META.layer === 'general';   /* ?map comes from the Māori page's General tab: land on the map, not the briefing */
+  var toMap = /[?&]map\b/.test(location.search);   /* ?map comes from the layer tabs: land on the map, not the briefing */
   /* Safari can restore the previous page's scroll offset late, after load. Until the reader touches the page (or 2.5 s pass), keep putting the page where this arrival belongs: the top, or the map. */
   var touched = false, until = Date.now() + 2500;
   ['touchstart', 'pointerdown', 'mousedown', 'wheel', 'keydown'].forEach(function (ev) { window.addEventListener(ev, function () { touched = true; }, { passive: true, once: true }); });
@@ -1051,8 +1051,8 @@ dl{margin:0}dt{font:500 11px var(--f-mono);letter-spacing:.06em;text-transform:u
   window.addEventListener('load', place); window.addEventListener('scroll', place, { passive: true });
   window.addEventListener('pageshow', function (e) { if (e.persisted) { touched = false; until = Date.now() + 2500; place(); } });
   var host = document.getElementById('intro-host'), tpl = document.getElementById('intro-tpl');
-  if (host) { var ln = document.getElementById('layernav'); if (ln) { var gen = META.layer === 'general', bp = document.createElement('p'); bp.style.cssText = 'margin:-4px 0 14px;font:500 14px var(--f-body)'; bp.innerHTML = '<a href="' + (gen ? '#intro-host' : '../#intro-host') + '" style="color:var(--ink);text-underline-offset:3px;display:inline-block;padding:10px 0">' + 'Read the briefing' + ' \u2191</a>'; if (gen) bp.firstChild.addEventListener('click', function (e) { e.preventDefault(); host.scrollIntoView({ behavior: 'smooth' }); }); ln.insertAdjacentElement('afterend', bp); } }
-  if (!host || !tpl || META.layer !== 'general') { if (host) host.remove(); return; }
+  if (host) { var ln = document.getElementById('layernav'); if (ln) { var bp = document.createElement('p'); bp.style.cssText = 'margin:-4px 0 14px;font:500 14px var(--f-body)'; bp.innerHTML = '<a href="' + '#intro-host' + '" style="color:var(--ink);text-underline-offset:3px;display:inline-block;padding:10px 0">' + 'Read the briefing' + ' \u2191</a>'; bp.firstChild.addEventListener('click', function (e) { e.preventDefault(); host.scrollIntoView({ behavior: 'smooth' }); }); ln.insertAdjacentElement('afterend', bp); } }
+  if (!host || !tpl) { if (host) host.remove(); return; }
   var R = host.attachShadow({ mode: 'open' }); R.appendChild(tpl.content.cloneNode(true)); host.style.display = 'block';
   var sk = R.getElementById('skip'); if (sk) sk.addEventListener('click', function (e) { e.preventDefault(); var m = document.getElementById('mapstart'); if (m) m.scrollIntoView({ behavior: 'smooth' }); });
 

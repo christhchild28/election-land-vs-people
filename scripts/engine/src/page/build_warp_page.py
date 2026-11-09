@@ -110,7 +110,6 @@ else: _ctl = _leg = ''
 _ol = '<label class="tog"><input type="checkbox" id="outline" checked> Land outlines</label>' if cfg.c.get('ui', {}).get('outline_toggle', True) else ''
 t = t.replace('<!--OUTLINE_TOG-->', _ol)
 # Visitor analytics: set "analytics": {"goatcounter": "<site code>"} in the config to load GoatCounter (count.js) on this page. Off by default.
-if cfg.c.get('layer') != 'general': t = re.sub(r'<template id="intro-tpl">.*?</template>\n', '', t, flags=re.S)   # the briefing belongs to the general layer only
 if cfg.c.get('layer') not in (None, 'general'): t = re.sub(r'<nav class="pgnav"[^>]*><a class="back"[^>]*>[^<]*</a><!--next--><!--/next--></nav>\n?', '', t)   # a layer page belongs to the general page's group: no separate back link
 _gc = (cfg.c.get('analytics') or {}).get('goatcounter')
 t = t.replace('/*TRK_ID*/', cfg.c.get('id', 'page'))
