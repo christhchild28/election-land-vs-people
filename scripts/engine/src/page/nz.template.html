@@ -1,4 +1,4 @@
-<title>{{STATE}} Population Lens</title>
+<title>{{STATE}} 2026 election: land vs people</title>
 <!--ANALYTICS-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -297,7 +297,6 @@ td.m { font-family: var(--f-mono); }
 
 <template id="intro-tpl"><style>:host{display:block;font:400 16px/1.55 var(--f-body);color:var(--ink);--card:var(--raised);--tpm:var(--ip-tpm);--gr:var(--ip-gr);--lab:var(--ip-lab);--opp:var(--ip-opp);--nat:var(--ip-nat);--nzf:var(--ip-nzf);--act:var(--ip-act);}
 *{box-sizing:border-box}
-
 .kick{font:500 12px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:0 0 10px}
 h1{font:800 clamp(28px,6vw,44px)/1.05 var(--f-body);margin:0 0 10px;letter-spacing:-.02em}
 h2{font:700 13px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:44px 0 14px}
@@ -313,6 +312,7 @@ h2{font:700 13px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;c
 #hemi{width:100%;height:auto;display:block}
 .s{stroke:var(--bg);stroke-width:.8;transition:opacity .15s}
 .s.tpm{fill:var(--tpm)}.s.gr{fill:var(--gr)}.s.lab{fill:var(--lab)}.s.opp{fill:var(--opp)}.s.nat{fill:var(--nat)}.s.nzf{fill:var(--nzf)}.s.act{fill:var(--act)}
+.s.act{stroke:var(--ink-3);stroke-width:.5}   /* pale yellow needs an edge on the light page */
 .hemiwrap.f .s{opacity:.18}.hemiwrap.f .s.on{opacity:1}
 .maj{stroke:var(--ink);stroke-width:1;stroke-dasharray:3 2}
 .center{position:absolute;left:0;right:0;bottom:6%;text-align:center;pointer-events:none}
@@ -320,7 +320,7 @@ h2{font:700 13px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;c
 .center span{font:500 11px var(--f-mono);color:var(--ink-3);letter-spacing:.04em}
 .majlab{font:500 11px var(--f-mono);color:var(--ink-3);text-align:center;margin:2px 0 10px}
 .legend{display:flex;flex-wrap:wrap;gap:6px 8px;justify-content:center;margin:6px 0 14px}
-.lg{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 10px;border:1px solid var(--hair);border-radius:999px;font:500 13px var(--f-body);background:var(--card);cursor:pointer;color:var(--ink)}
+.lg{margin:0;display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 10px;border:1px solid var(--hair);border-radius:999px;font:500 13px var(--f-body);background:var(--card);cursor:pointer;color:var(--ink)}
 .lg i,td i,.pty i{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none}
 .lg b{font-variant-numeric:tabular-nums}
 .lg[aria-pressed=true]{border-color:var(--ink)}
@@ -329,7 +329,7 @@ h2{font:700 13px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;c
 .bloc{margin:16px 0 6px}
 .bar{position:relative;display:flex;height:34px;gap:2px;border-radius:8px;overflow:hidden}
 .bar div{display:flex;align-items:center;justify-content:center;font:700 14px var(--f-body);color:#fff}
-.bar .g{background:var(--nat)}.s.act{stroke:var(--ink-3);stroke-width:.5}.bar .o{background:var(--ink-3)}
+.bar .g{background:var(--nat)}.bar .o{background:var(--ink-3)}
 .tick{position:absolute;top:-6px;bottom:-6px;width:2px;background:var(--ink)}
 .blab{display:flex;justify-content:space-between;font:500 12px/1.3 var(--f-mono);color:var(--ink-2);margin-top:6px;gap:8px}
 .note{font-size:14px;color:var(--ink-2);max-width:66ch;margin:10px 0 0}
@@ -348,7 +348,6 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
 .ph{position:relative;aspect-ratio:4/4.2;background:var(--hair);overflow:hidden}
 .ph img{width:100%;height:100%;object-fit:cover;object-position:50% 12%;display:block}
 .pm{display:inline-block;margin:8px 0 0;font:700 11px var(--f-mono);letter-spacing:.04em;text-transform:uppercase;background:var(--ink);color:var(--bg);padding:4px 8px;border-radius:6px}
-.il{position:absolute;left:8px;bottom:8px;font:500 10px var(--f-mono);letter-spacing:.04em;background:rgba(0,0,0,.62);color:#fff;padding:3px 7px;border-radius:999px}
 .cb{padding:14px 14px 16px;border-top:4px solid var(--c,var(--hair))}
 .tpm{--c:var(--tpm)}.gr{--c:var(--gr)}.lab{--c:var(--lab)}.opp{--c:var(--opp)}.nat{--c:var(--nat)}.nzf{--c:var(--nzf)}.act{--c:var(--act)}
 .card .pty{display:inline-flex;align-items:center;gap:6px;font:500 12px var(--f-mono);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2)}
@@ -364,7 +363,7 @@ dl{margin:0}dt{font:500 11px var(--f-mono);letter-spacing:.06em;text-transform:u
 .arrows button{width:44px;height:44px;border-radius:50%;border:1px solid var(--hair);background:var(--card);color:var(--ink);font-size:18px;cursor:pointer}
 .arrows button:disabled{opacity:.35;cursor:default}
 .hintswipe{font:500 12px var(--f-mono);color:var(--ink-3);margin:0 0 8px}
-@media(min-width:880px){.card{flex-basis:300px}.rail{margin:0 -16px;padding-left:16px}}
+@media(min-width:880px){.card{flex-basis:300px}}
 /* context */
 .ctx{max-width:66ch}.ctx h3{font:800 20px/1.2 var(--f-body);margin:26px 0 6px;letter-spacing:-.01em}.ctx p{margin:0 0 12px}
 .three{display:grid;gap:8px;margin:18px 0;padding:0;list-style:none;counter-reset:t}
@@ -373,15 +372,12 @@ dl{margin:0}dt{font:500 11px var(--f-mono);letter-spacing:.06em;text-transform:u
 .src{font-size:14px;color:var(--ink-2)}.src a{color:var(--ink)}
 .foot{margin-top:30px;padding-top:14px;border-top:1px solid var(--hair);font-size:13px;color:var(--ink-3);max-width:70ch}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
-
 .by{font:500 14px/1.35 var(--f-body);color:var(--ink-2);margin:0 0 4px}
-
 /* the card in view pops; the others sit back */
 .card{transform:scale(.93);opacity:.7;transition:transform .12s cubic-bezier(.3,.9,.3,1),opacity .12s linear,box-shadow .12s}
 .card.on{transform:scale(1);opacity:1;box-shadow:0 12px 30px rgba(0,0,0,.18)}
 @media(min-width:880px){.card{opacity:.85}.card.on{opacity:1}}
 @media(prefers-reduced-motion:reduce){.card{transform:none;transition:opacity .2s}.card.on{box-shadow:0 6px 18px rgba(0,0,0,.14)}}
-
 /* one-time entrance when the rail first scrolls into view */
 .rail:not(.in) .card{opacity:0}
 .rail.in .card{animation:rise .24s cubic-bezier(.3,.9,.3,1) backwards;animation-delay:calc(var(--i,0)*25ms)}
@@ -398,7 +394,7 @@ dl{margin:0}dt{font:500 11px var(--f-mono);letter-spacing:.06em;text-transform:u
 <div class="stats"><div class="stat"><b>131</b><span>projected MPs</span></div><div class="stat"><b>66</b><span>seats for a majority</span></div><div class="stat"><b>7</b><span>parties in Parliament</span></div></div>
 <div class="hemiwrap" id="hw"><svg id="hemi" viewBox="0 0 360 200" role="img" aria-label="Parliament of 131 seats by party"><circle class="s tpm" cx="108.6" cy="186.0" r="3.15" data-p="0"/><circle class="s tpm" cx="88.9" cy="186.0" r="3.15" data-p="0"/><circle class="s tpm" cx="69.2" cy="186.0" r="3.15" data-p="0"/><circle class="s tpm" cx="49.4" cy="186.0" r="3.15" data-p="0"/><circle class="s tpm" cx="29.7" cy="186.0" r="3.15" data-p="0"/><circle class="s gr" cx="10.0" cy="186.0" r="3.15" data-p="1"/><circle class="s gr" cx="10.9" cy="168.2" r="3.15" data-p="1"/><circle class="s gr" cx="30.8" cy="167.9" r="3.15" data-p="1"/><circle class="s gr" cx="50.7" cy="168.2" r="3.15" data-p="1"/><circle class="s gr" cx="70.7" cy="167.8" r="3.15" data-p="1"/><circle class="s gr" cx="90.9" cy="167.1" r="3.15" data-p="1"/><circle class="s gr" cx="13.7" cy="150.7" r="3.15" data-p="1"/><circle class="s gr" cx="34.1" cy="150.0" r="3.15" data-p="1"/><circle class="s gr" cx="111.0" cy="167.5" r="3.15" data-p="1"/><circle class="s gr" cx="54.3" cy="150.8" r="3.15" data-p="1"/><circle class="s gr" cx="18.3" cy="133.5" r="3.15" data-p="1"/><circle class="s gr" cx="75.2" cy="150.0" r="3.15" data-p="1"/><circle class="s gr" cx="39.5" cy="132.7" r="3.15" data-p="1"/><circle class="s gr" cx="60.2" cy="134.0" r="3.15" data-p="1"/><circle class="s gr" cx="96.8" cy="148.9" r="3.15" data-p="1"/><circle class="s gr" cx="24.7" cy="116.9" r="3.15" data-p="1"/><circle class="s lab" cx="46.9" cy="116.2" r="3.15" data-p="2"/><circle class="s lab" cx="82.5" cy="133.2" r="3.15" data-p="2"/><circle class="s lab" cx="118.2" cy="150.3" r="3.15" data-p="2"/><circle class="s lab" cx="32.8" cy="101.0" r="3.15" data-p="2"/><circle class="s lab" cx="68.4" cy="118.2" r="3.15" data-p="2"/><circle class="s lab" cx="56.3" cy="100.6" r="3.15" data-p="2"/><circle class="s lab" cx="106.3" cy="132.4" r="3.15" data-p="2"/><circle class="s lab" cx="42.5" cy="86.1" r="3.15" data-p="2"/><circle class="s lab" cx="92.5" cy="117.9" r="3.15" data-p="2"/><circle class="s lab" cx="78.7" cy="103.6" r="3.15" data-p="2"/><circle class="s lab" cx="67.5" cy="86.3" r="3.15" data-p="2"/><circle class="s lab" cx="53.7" cy="72.2" r="3.15" data-p="2"/><circle class="s lab" cx="129.5" cy="135.5" r="3.15" data-p="2"/><circle class="s lab" cx="90.9" cy="90.6" r="3.15" data-p="2"/><circle class="s lab" cx="104.9" cy="104.5" r="3.15" data-p="2"/><circle class="s lab" cx="119.0" cy="118.3" r="3.15" data-p="2"/><circle class="s lab" cx="66.2" cy="59.7" r="3.15" data-p="2"/><circle class="s lab" cx="80.3" cy="73.5" r="3.15" data-p="2"/><circle class="s lab" cx="80.1" cy="48.5" r="3.15" data-p="2"/><circle class="s lab" cx="104.7" cy="79.3" r="3.15" data-p="2"/><circle class="s lab" cx="94.6" cy="62.3" r="3.15" data-p="2"/><circle class="s lab" cx="119.4" cy="93.2" r="3.15" data-p="2"/><circle class="s lab" cx="144.3" cy="124.2" r="3.15" data-p="2"/><circle class="s lab" cx="134.4" cy="107.1" r="3.15" data-p="2"/><circle class="s lab" cx="95.0" cy="38.8" r="3.15" data-p="2"/><circle class="s lab" cx="110.2" cy="52.9" r="3.15" data-p="2"/><circle class="s lab" cx="119.9" cy="70.1" r="3.15" data-p="2"/><circle class="s lab" cx="110.9" cy="30.7" r="3.15" data-p="2"/><circle class="s lab" cx="135.5" cy="84.5" r="3.15" data-p="2"/><circle class="s lab" cx="126.7" cy="45.5" r="3.15" data-p="2"/><circle class="s lab" cx="136.3" cy="63.0" r="3.15" data-p="2"/><circle class="s lab" cx="151.8" cy="99.3" r="3.15" data-p="2"/><circle class="s lab" cx="127.5" cy="24.3" r="3.15" data-p="2"/><circle class="s lab" cx="161.5" cy="117.0" r="3.15" data-p="2"/><circle class="s lab" cx="152.8" cy="78.6" r="3.15" data-p="2"/><circle class="s lab" cx="144.0" cy="40.1" r="3.15" data-p="2"/><circle class="s opp" cx="144.7" cy="19.7" r="3.15" data-p="3"/><circle class="s opp" cx="153.4" cy="58.2" r="3.15" data-p="3"/><circle class="s opp" cx="161.9" cy="36.8" r="3.15" data-p="3"/><circle class="s opp" cx="170.5" cy="95.4" r="3.15" data-p="3"/><circle class="s opp" cx="162.2" cy="16.9" r="3.15" data-p="3"/><circle class="s opp" cx="170.8" cy="75.5" r="3.15" data-p="3"/><circle class="s opp" cx="171.1" cy="55.7" r="3.15" data-p="3"/><circle class="s nat" cx="180.0" cy="114.6" r="3.15" data-p="4"/><circle class="s nat" cx="180.0" cy="35.7" r="3.15" data-p="4"/><circle class="s nat" cx="180.0" cy="16.0" r="3.15" data-p="4"/><circle class="s nat" cx="188.9" cy="55.7" r="3.15" data-p="4"/><circle class="s nat" cx="189.2" cy="75.5" r="3.15" data-p="4"/><circle class="s nat" cx="189.5" cy="95.4" r="3.15" data-p="4"/><circle class="s nat" cx="197.8" cy="16.9" r="3.15" data-p="4"/><circle class="s nat" cx="198.1" cy="36.8" r="3.15" data-p="4"/><circle class="s nat" cx="206.6" cy="58.2" r="3.15" data-p="4"/><circle class="s nat" cx="215.3" cy="19.7" r="3.15" data-p="4"/><circle class="s nat" cx="216.0" cy="40.1" r="3.15" data-p="4"/><circle class="s nat" cx="207.2" cy="78.6" r="3.15" data-p="4"/><circle class="s nat" cx="198.5" cy="117.0" r="3.15" data-p="4"/><circle class="s nat" cx="208.2" cy="99.3" r="3.15" data-p="4"/><circle class="s nat" cx="232.5" cy="24.3" r="3.15" data-p="4"/><circle class="s nat" cx="223.7" cy="63.0" r="3.15" data-p="4"/><circle class="s nat" cx="233.3" cy="45.5" r="3.15" data-p="4"/><circle class="s nat" cx="224.5" cy="84.5" r="3.15" data-p="4"/><circle class="s nat" cx="249.1" cy="30.7" r="3.15" data-p="4"/><circle class="s nat" cx="240.1" cy="70.1" r="3.15" data-p="4"/><circle class="s nat" cx="249.8" cy="52.9" r="3.15" data-p="4"/><circle class="s nat" cx="215.7" cy="124.2" r="3.15" data-p="4"/><circle class="s nat" cx="225.6" cy="107.1" r="3.15" data-p="4"/><circle class="s nat" cx="265.0" cy="38.8" r="3.15" data-p="4"/><circle class="s nat" cx="240.6" cy="93.2" r="3.15" data-p="4"/><circle class="s nat" cx="265.4" cy="62.3" r="3.15" data-p="4"/><circle class="s nat" cx="255.3" cy="79.3" r="3.15" data-p="4"/><circle class="s nat" cx="279.9" cy="48.5" r="3.15" data-p="4"/><circle class="s nat" cx="279.7" cy="73.5" r="3.15" data-p="4"/><circle class="s nat" cx="241.0" cy="118.3" r="3.15" data-p="4"/><circle class="s nat" cx="293.8" cy="59.7" r="3.15" data-p="4"/><circle class="s nat" cx="255.1" cy="104.5" r="3.15" data-p="4"/><circle class="s nat" cx="269.1" cy="90.6" r="3.15" data-p="4"/><circle class="s nat" cx="230.5" cy="135.5" r="3.15" data-p="4"/><circle class="s nat" cx="306.3" cy="72.2" r="3.15" data-p="4"/><circle class="s nat" cx="292.5" cy="86.3" r="3.15" data-p="4"/><circle class="s nat" cx="281.3" cy="103.6" r="3.15" data-p="4"/><circle class="s nat" cx="267.5" cy="117.9" r="3.15" data-p="4"/><circle class="s nat" cx="253.7" cy="132.4" r="3.15" data-p="4"/><circle class="s nat" cx="317.5" cy="86.1" r="3.15" data-p="4"/><circle class="s nat" cx="303.7" cy="100.6" r="3.15" data-p="4"/><circle class="s nat" cx="291.6" cy="118.2" r="3.15" data-p="4"/><circle class="s nzf" cx="241.8" cy="150.3" r="3.15" data-p="5"/><circle class="s nzf" cx="327.2" cy="101.0" r="3.15" data-p="5"/><circle class="s nzf" cx="277.5" cy="133.2" r="3.15" data-p="5"/><circle class="s nzf" cx="313.1" cy="116.2" r="3.15" data-p="5"/><circle class="s nzf" cx="263.2" cy="148.9" r="3.15" data-p="5"/><circle class="s nzf" cx="335.3" cy="116.9" r="3.15" data-p="5"/><circle class="s nzf" cx="299.8" cy="134.0" r="3.15" data-p="5"/><circle class="s nzf" cx="320.5" cy="132.7" r="3.15" data-p="5"/><circle class="s nzf" cx="284.8" cy="150.0" r="3.15" data-p="5"/><circle class="s nzf" cx="341.7" cy="133.5" r="3.15" data-p="5"/><circle class="s nzf" cx="305.7" cy="150.8" r="3.15" data-p="5"/><circle class="s nzf" cx="249.0" cy="167.5" r="3.15" data-p="5"/><circle class="s act" cx="325.9" cy="150.0" r="3.15" data-p="6"/><circle class="s act" cx="269.1" cy="167.1" r="3.15" data-p="6"/><circle class="s act" cx="346.3" cy="150.7" r="3.15" data-p="6"/><circle class="s act" cx="289.3" cy="167.8" r="3.15" data-p="6"/><circle class="s act" cx="309.3" cy="168.2" r="3.15" data-p="6"/><circle class="s act" cx="329.2" cy="167.9" r="3.15" data-p="6"/><circle class="s act" cx="349.1" cy="168.2" r="3.15" data-p="6"/><circle class="s act" cx="251.4" cy="186.0" r="3.15" data-p="6"/><circle class="s act" cx="271.1" cy="186.0" r="3.15" data-p="6"/><circle class="s act" cx="290.8" cy="186.0" r="3.15" data-p="6"/><circle class="s act" cx="310.6" cy="186.0" r="3.15" data-p="6"/><circle class="s act" cx="330.3" cy="186.0" r="3.15" data-p="6"/><circle class="s act" cx="350.0" cy="186.0" r="3.15" data-p="6"/><line class="maj" x1="180.0" y1="128.2" x2="180.0" y2="2.4"/></svg><div class="center"><b id="cn">131</b><span id="cl">seats</span></div></div>
 <p class="majlab">Dashed line: the 66th seat, where a majority begins</p>
-<div class="legend" id="lg" role="group" aria-label="Filter seats by party"><span class="lg tpm"><i></i>Te Pāti Māori <b>5</b></span><span class="lg gr"><i></i>Greens <b>16</b></span><span class="lg lab"><i></i>Labour <b>36</b></span><span class="lg opp"><i></i>Opportunity <b>7</b></span><span class="lg nat"><i></i>National <b>42</b></span><span class="lg nzf"><i></i>NZ First <b>12</b></span><span class="lg act"><i></i>ACT <b>13</b></span></div>
+<div class="legend" id="lg" role="group" aria-label="Filter seats by party"><button type="button" class="lg tpm"><i></i>Te Pāti Māori <b>5</b></button><button type="button" class="lg gr"><i></i>Greens <b>16</b></button><button type="button" class="lg lab"><i></i>Labour <b>36</b></button><button type="button" class="lg opp"><i></i>Opportunity <b>7</b></button><button type="button" class="lg nat"><i></i>National <b>42</b></button><button type="button" class="lg nzf"><i></i>NZ First <b>12</b></button><button type="button" class="lg act"><i></i>ACT <b>13</b></button></div>
 <div class="bloc"><div class="bar" id="bar"><div class="g" style="flex:67">67</div><div class="o" style="flex:64">64</div><span class="tick" style="left:calc(66/131*100%)"></span></div>
 <div class="blab"><span>National + ACT + NZ First: 67</span><span>Labour, Greens, Te Pāti Māori, Opportunity: 64</span></div></div>
 <p class="note">Here we count seats in Parliament, not electorates won: the map below shows who won each local race, while these numbers include list seats allocated from the party vote. The current governing parties hold 67 of 131 provisional seats, one more than a majority needs. Special votes are still to be counted, and the Commission expects official results on 27 November.</p>
@@ -1026,19 +1022,20 @@ dl{margin:0}dt{font:500 11px var(--f-mono);letter-spacing:.06em;text-transform:u
     drawSc(); drawRk(); chartSel(null); window.__chartSel = chartSel;
   })();
 
-/* Briefing: lives in a shadow root so its styles cannot touch the map page. General layer only. */
+/* Briefing: lives in a shadow root so its styles cannot touch the map page. General layer only; the Māori layer gets a link to it. */
 (function () {
-  /* ?map (from the Māori page's General tab): land on the map, not the briefing */
   /* Switching layers must not carry the old scroll position over (Safari kept the General page's offset and opened the Māori page at its foot). */
   try { history.scrollRestoration = 'manual'; } catch (e) {}
-  if (!/[?&]map\b/.test(location.search)) { var top0 = function () { window.scrollTo(0, 0); }; top0(); setTimeout(top0, 0); window.addEventListener('load', top0); window.addEventListener('pageshow', top0); }
-  if (/[?&]map\b/.test(location.search) && META.layer === 'general') { var goMap = function () { var m = document.getElementById('mapstart'); if (m) m.scrollIntoView(); }; setTimeout(goMap, 0); window.addEventListener('load', goMap); }
+  var toMap = /[?&]map\b/.test(location.search);   /* ?map comes from the Māori page's General tab: land on the map, not the briefing */
+  if (toMap && META.layer === 'general') { var goMap = function () { var m = document.getElementById('mapstart'); if (m) m.scrollIntoView(); }; setTimeout(goMap, 0); window.addEventListener('load', goMap); }
+  else { var top0 = function () { window.scrollTo(0, 0); }; top0(); setTimeout(top0, 0); window.addEventListener('pageshow', function (e) { if (e.persisted) top0(); }); }
   var host = document.getElementById('intro-host'), tpl = document.getElementById('intro-tpl');
   if (host) { var ln = document.getElementById('layernav'); if (ln) { var gen = META.layer === 'general', bp = document.createElement('p'); bp.style.cssText = 'margin:-4px 0 14px;font:500 14px var(--f-body)'; bp.innerHTML = '<a href="' + (gen ? '#intro-host' : '../#intro-host') + '" style="color:var(--ink);text-underline-offset:3px;display:inline-block;padding:10px 0">' + (gen ? 'Read the briefing' : 'New to NZ politics? Read the briefing') + ' \u2191</a>'; if (gen) bp.firstChild.addEventListener('click', function (e) { e.preventDefault(); host.scrollIntoView({ behavior: 'smooth' }); }); ln.insertAdjacentElement('afterend', bp); } }
   if (!host || !tpl || META.layer !== 'general') { if (host) host.remove(); return; }
   var R = host.attachShadow({ mode: 'open' }); R.appendChild(tpl.content.cloneNode(true)); host.style.display = 'block';
   var sk = R.getElementById('skip'); if (sk) sk.addEventListener('click', function (e) { e.preventDefault(); var m = document.getElementById('mapstart'); if (m) m.scrollIntoView({ behavior: 'smooth' }); });
 
+  /* candidate rail, party filter */
 (function(){
 var rail=R.getElementById('rail'),cards=[].slice.call(rail.children),dots=R.getElementById('dots'),pv=R.getElementById('pv'),nx=R.getElementById('nx'),cur=0;
 cards.forEach(function(c,i){var b=document.createElement('button');b.className='dot';b.setAttribute('aria-label','Card '+(i+1));b.onclick=function(){go(i)};dots.appendChild(b)});

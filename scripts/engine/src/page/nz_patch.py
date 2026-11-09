@@ -106,6 +106,7 @@ sub("    hlI = i; syncHL();", "    hlI = i; syncHL(); if (window.__chartSel) win
 sub("  showCard(null);\n  recolor();", "/*CHARTJS*/\n  showCard(null);\n  recolor();")
 t = t.replace('/*CHARTCSS*/', open(os.path.join(H, 'nz_charts.css'), encoding='utf-8').read()).replace('/*CHARTJS*/', open(os.path.join(H, 'nz_charts.js'), encoding='utf-8').read())
 sub('<p>{{SOURCE}}</p>', '<p>{{SOURCE}}</p>\n    <p class="byline">By Christian Theodore &middot; Media Intelligence Architect, Fovea</p>')
+sub('<title>{{STATE}} Population Lens</title>', '<title>{{STATE}} 2026 election: land vs people</title>')
 # --- briefing (intro) above the map: shadow-DOM block on the general layer, plus a link to it on the Māori layer ---
 import nz_intro
 sub('<!--/next--></nav>\n    <p class="kicker">', '<!--/next--></nav>\n    <div id="intro-host" hidden></div>\n    <p class="kicker" id="mapstart">')

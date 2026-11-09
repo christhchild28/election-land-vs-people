@@ -1,5 +1,5 @@
 """Generates the New Zealand briefing (intro) markup: hemicycle, table, candidate cards. Imported by nz_patch.py."""
-import base64, math, json, html, sys
+import math
 # parties in chamber order (left->right), colours light/dark
 P=[('Te Pāti Māori','tpm',5,'#8e3a8a','#a4519a','Māori self-determination / social justice','0.57%'),
 ('Greens','gr',16,'#098137','#2fb060','Environmental / progressive left','13.30%'),
@@ -9,6 +9,7 @@ P=[('Te Pāti Māori','tpm',5,'#8e3a8a','#a4519a','Māori self-determination / s
 ('NZ First','nzf',12,'#5b6770','#9aa5ae','Nationalist / populist','9.78%'),
 ('ACT','act',13,'#FDE401','#FDE401','Libertarian / market-oriented right','10.92%')]
 assert sum(p[2] for p in P)==131
+assert sum(p[2] for p in P if p[1] in ('nat','act','nzf'))==67   # governing bloc shown in the bar
 # hemicycle seat positions
 N=131; rows=6; r0,r1=0.42,1.0
 rad=[r0+(r1-r0)*i/(rows-1) for i in range(rows)]
@@ -20,7 +21,7 @@ for r,c in zip(rad,counts):
         seats.append((a,r))
 seats.sort(key=lambda s:(-s[0],s[1]))
 W,H=360,200; cx,cy=W/2,H-14; R=W/2-10
-dots=[];i=0;idx=0
+dots=[]
 cum=[];s=0
 for p in P: s+=p[2]; cum.append(s)
 for n,(a,r) in enumerate(seats):
@@ -45,8 +46,7 @@ CARDS=[
 ]
 cards=''.join(f'''<article class="card {c[3]}" id="c{n}" aria-label="{c[1]}"><div class="ph"><img src="{img(c[0])}" alt="Illustration of {c[1]}" loading="lazy"></div><div class="cb"><span class="pty"><i></i>{c[2]}</span>{"<span class=\"pm\">Incumbent prime minister</span>" if c[1]=="Christopher Luxon" else ""}<h3>{c[1]}</h3><p class="seat">{c[4]}</p><p class="num">{c[5]}</p><dl><dt>Platform</dt><dd>{c[6]}</dd><dt>History</dt><dd>{c[7]}</dd><dt>Why they matter</dt><dd>{c[8]}</dd></dl></div></article>''' for n,c in enumerate(CARDS))
 tbl=''.join(f'<tr class="{p[1]}"><td><i></i>{p[0]}</td><td class="pol">{p[5]}</td><td class="n">{p[6]}</td><td class="n">{p[2]}</td></tr>' for p in sorted(P,key=lambda p:-p[2]))
-leg=''.join(f'<span class="lg {p[1]}"><i></i>{p[0]} <b>{p[2]}</b></span>' for p in P)
-css_light=''.join(f'--{p[1]}:{p[3]};' for p in P); css_dark=''.join(f'--{p[1]}:{p[4]};' for p in P)
+leg=''.join(f'<button type="button" class="lg {p[1]}"><i></i>{p[0]} <b>{p[2]}</b></button>' for p in P)
 
 def render():
     """Return (style, markup) for the shadow root; the page CSS defines --ip-* party colours."""

@@ -110,6 +110,7 @@ else: _ctl = _leg = ''
 _ol = '<label class="tog"><input type="checkbox" id="outline" checked> Land outlines</label>' if cfg.c.get('ui', {}).get('outline_toggle', True) else ''
 t = t.replace('<!--OUTLINE_TOG-->', _ol)
 # Visitor analytics: set "analytics": {"goatcounter": "<site code>"} in the config to load GoatCounter (count.js) on this page. Off by default.
+if cfg.c.get('layer') != 'general': t = re.sub(r'<template id="intro-tpl">.*?</template>\n', '', t, flags=re.S)   # the briefing belongs to the general layer only
 _gc = (cfg.c.get('analytics') or {}).get('goatcounter')
 t = t.replace('/*TRK_ID*/', cfg.c.get('id', 'page'))
 t = t.replace('<!--ANALYTICS-->', ('<script data-goatcounter="https://%s.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>' % html.escape(_gc, quote=True)) if _gc else '')
