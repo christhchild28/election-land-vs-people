@@ -109,6 +109,7 @@ else: _ctl = _leg = ''
 # Land outlines checkbox (show/hide the pale real-state shape). Set "ui": {"outline_toggle": false} in the config to leave it off; the shape then stays visible.
 _ol = '<label class="tog"><input type="checkbox" id="outline" checked> Land outlines</label>' if cfg.c.get('ui', {}).get('outline_toggle', True) else ''
 t = t.replace('<!--OUTLINE_TOG-->', _ol)
+if cfg.c.get('layer') not in (None, 'general'): t = t.replace('<img src="img/', '<img src="../img/')   # layer pages sit one folder down; the briefing's candidate pictures live in the parent's img/
 # Visitor analytics: set "analytics": {"goatcounter": "<site code>"} in the config to load GoatCounter (count.js) on this page. Off by default.
 if cfg.c.get('layer') not in (None, 'general'): t = re.sub(r'<nav class="pgnav"[^>]*><a class="back"[^>]*>[^<]*</a><!--next--><!--/next--></nav>\n?', '', t)   # a layer page belongs to the general page's group: no separate back link
 _gc = (cfg.c.get('analytics') or {}).get('goatcounter')
