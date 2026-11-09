@@ -80,13 +80,13 @@ dl{margin:0}dt{font:500 11px var(--f-mono);letter-spacing:.06em;text-transform:u
 .by{font:500 14px/1.35 var(--f-body);color:var(--ink-2);margin:0 0 4px}
 
 /* the card in view pops; the others sit back */
-.card{transform:scale(.93);opacity:.7;transition:transform .35s cubic-bezier(.2,.8,.2,1),opacity .35s,box-shadow .35s}
+.card{transform:scale(.93);opacity:.7;transition:transform .18s cubic-bezier(.3,.9,.3,1),opacity .18s,box-shadow .18s}
 .card.on{transform:scale(1);opacity:1;box-shadow:0 12px 30px rgba(0,0,0,.18)}
 @media(min-width:880px){.card{opacity:.85}.card.on{opacity:1}}
 @media(prefers-reduced-motion:reduce){.card{transform:none;transition:opacity .2s}.card.on{box-shadow:0 6px 18px rgba(0,0,0,.14)}}
 
 /* one-time entrance when the rail first scrolls into view */
 .rail:not(.in) .card{opacity:0}
-.rail.in .card{animation:rise .6s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--i,0)*80ms)}
-@keyframes rise{from{opacity:0;transform:translateY(28px) scale(.9)}}
+.rail.in .card{animation:rise .32s cubic-bezier(.3,.9,.3,1) backwards;animation-delay:calc(var(--i,0)*40ms)}
+@keyframes rise{from{opacity:0;transform:translateY(18px) scale(.94)}}
 @media(prefers-reduced-motion:reduce){.rail:not(.in) .card{opacity:.7}.rail.in .card{animation:none}}
