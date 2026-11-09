@@ -91,7 +91,7 @@ sub("[c.name, fmt(c.pop), fmt(c.d), fmt(c.r), (c.dem ? META.a + ' +' : META.b + 
 # --- layer switch between the general and Māori electorate pages ---
 sub('<p class="dek" id="dek"></p>', '<p class="dek" id="dek"></p>\n    <div class="layernav" id="layernav" role="group" aria-label="Electorate layer"></div>')
 sub('/*PARTYCSS*/', '/*PARTYCSS*/\n.layernav { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 14px; }\n.layernav a { font: 500 14px/1 var(--f-body); min-height: 44px; display: inline-flex; align-items: center; padding: 0 16px; border: 1px solid var(--hair); border-radius: 999px; color: var(--ink-2); text-decoration: none; }\n.layernav a[aria-current="page"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }')
-sub("showCard(null);\n  recolor();", "(function () { var g = META.layer === 'general'; document.getElementById('layernav').innerHTML = '<a href=\"' + (g ? './' : '../') + '\"' + (g ? ' aria-current=\"page\"' : '') + '>General (64)</a><a href=\"' + (g ? 'maori/' : './') + '\"' + (g ? '' : ' aria-current=\"page\"') + '>M\u0101ori (7)</a>'; })();\n  showCard(null);\n  recolor();")
+sub("showCard(null);\n  recolor();", "(function () { var g = META.layer === 'general'; document.getElementById('layernav').innerHTML = '<a href=\"' + (g ? './' : '../?map') + '\"' + (g ? ' aria-current=\"page\"' : '') + '>General (64)</a><a href=\"' + (g ? 'maori/' : './') + '\"' + (g ? '' : ' aria-current=\"page\"') + '>M\u0101ori (7)</a>'; })();\n  showCard(null);\n  recolor();")
 
 # --- charts dropdown above the electorate table ---
 sub('  <details>\n    <summary>All {{NCOUNTIES}}', """  <details id="chartsd" class="chartsd">

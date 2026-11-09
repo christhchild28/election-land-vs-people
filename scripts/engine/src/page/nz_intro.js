@@ -1,7 +1,9 @@
 /* Briefing: lives in a shadow root so its styles cannot touch the map page. General layer only. */
 (function () {
+  /* ?map (from the Māori page's General tab): land on the map, not the briefing */
+  if (/[?&]map\b/.test(location.search) && META.layer === 'general') { var goMap = function () { var m = document.getElementById('mapstart'); if (m) m.scrollIntoView(); }; setTimeout(goMap, 0); window.addEventListener('load', goMap); }
   var host = document.getElementById('intro-host'), tpl = document.getElementById('intro-tpl');
-  if (host && META.layer === 'maori') { var ln = document.getElementById('layernav'); if (ln) { var a = document.createElement('a'); a.href = '../#intro-host'; a.className = 'brieflink'; a.textContent = 'Read the briefing'; a.style.cssText = 'display:inline-flex;align-items:center;min-height:44px;margin-left:4px;font:500 14px var(--f-body);color:var(--ink);text-decoration:underline;text-underline-offset:3px'; ln.appendChild(a); } }
+  if (host && META.layer === 'maori') { var ln = document.getElementById('layernav'); if (ln) { var bp = document.createElement('p'); bp.style.cssText = 'margin:-4px 0 14px;font:500 14px var(--f-body)'; bp.innerHTML = '<a href="../#intro-host" style="color:var(--ink);text-underline-offset:3px;display:inline-block;padding:10px 0">New to NZ politics? Read the briefing \u2191</a>'; ln.insertAdjacentElement('afterend', bp); } }
   if (!host || !tpl || META.layer !== 'general') { if (host) host.remove(); return; }
   var R = host.attachShadow({ mode: 'open' }); R.appendChild(tpl.content.cloneNode(true)); host.style.display = 'block';
   var sk = R.getElementById('skip'); if (sk) sk.addEventListener('click', function (e) { e.preventDefault(); var m = document.getElementById('mapstart'); if (m) m.scrollIntoView({ behavior: 'smooth' }); });
