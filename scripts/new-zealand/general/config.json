@@ -27,26 +27,26 @@
     {
       "name": "National",
       "key": "nat",
-      "light": "#1f6fc2",
+      "light": "#00529F",
       "dark": "#3b8fe0"
     },
     {
       "name": "Labour",
       "key": "lab",
-      "light": "#d6362b",
-      "dark": "#e8625a"
+      "light": "#DE2C34",
+      "dark": "#f2635c"
     },
     {
       "name": "Greens",
       "key": "grn",
-      "light": "#00a58a",
-      "dark": "#25b394"
+      "light": "#098137",
+      "dark": "#2fb060"
     },
     {
       "name": "ACT",
       "key": "act",
-      "light": "#e0a100",
-      "dark": "#d9a520"
+      "light": "#FDE401",
+      "dark": "#FDE401"
     },
     {
       "name": "Te Pāti Māori",

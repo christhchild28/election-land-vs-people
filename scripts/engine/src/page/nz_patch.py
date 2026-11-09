@@ -105,5 +105,14 @@ sub('/*PARTYCSS*/\n.layernav', '/*PARTYCSS*/\n/*CHARTCSS*/\n.layernav')
 sub("    hlI = i; syncHL();", "    hlI = i; syncHL(); if (window.__chartSel) window.__chartSel(i);")
 sub("  showCard(null);\n  recolor();", "/*CHARTJS*/\n  showCard(null);\n  recolor();")
 t = t.replace('/*CHARTCSS*/', open(os.path.join(H, 'nz_charts.css'), encoding='utf-8').read()).replace('/*CHARTJS*/', open(os.path.join(H, 'nz_charts.js'), encoding='utf-8').read())
+# --- briefing (intro) above the map: shadow-DOM block on the general layer, plus a link to it on the Māori layer ---
+import nz_intro
+sub('<!--/next--></nav>\n    <p class="kicker">', '<!--/next--></nav>\n    <div id="intro-host" hidden></div>\n    <p class="kicker" id="mapstart">')
+sub('.layernav a[aria-current="page"]', '/*INTROVARS*/\n.layernav a[aria-current="page"]')
+sub('<script>\n(function () {\n  var LIVE', '<template id="intro-tpl"><style>/*INTROCSS*/</style>/*INTROHTML*/</template>\n<script>\n(function () {\n  var LIVE')
+sub("  showCard(null);\n  recolor();", "/*INTROJS*/\n  showCard(null);\n  recolor();")
+_st, _mk = nz_intro.render()
+t = t.replace('/*INTROVARS*/', nz_intro.party_vars() + '\n#intro-host { margin: 6px 0 34px; padding-bottom: 26px; border-bottom: 1px solid var(--hair); }\n#mapstart { scroll-margin-top: 16px; }').replace('/*INTROCSS*/', _st).replace('/*INTROHTML*/', _mk).replace('/*INTROJS*/', open(os.path.join(H, 'nz_intro.js'), encoding='utf-8').read())
+
 open(os.path.join(H, 'nz.template.html'), 'w', encoding='utf-8').write(t)
 print('wrote nz.template.html', len(t))
